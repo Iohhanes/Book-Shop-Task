@@ -6,3 +6,6 @@ gradle
 ### IntelliJ IDEA ###
 .idea
 *.iml
+
+### Credentials ###
+/src/main/resources/google-cloud-credentials.json

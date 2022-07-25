@@ -1,9 +1,14 @@
 package com.academia.bookshop.serive;
 
-import com.academia.bookshop.model.entity.Book;
+import com.academia.bookshop.model.dto.request.AddBookRequestDto;
+import com.academia.bookshop.model.dto.response.BookDto;
 
 import java.util.List;
 
 public interface BookService {
-    List<Book> findAll();
+    List<BookDto> findAll();
+
+    List<BookDto> search(String search);
+
+    BookDto add(AddBookRequestDto addBookRequestDto);
 }

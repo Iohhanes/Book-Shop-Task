@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS bs_books
     price DECIMAL(15,2) NOT NULL DEFAULT 0.00,
     image_url TEXT,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     author_id INTEGER NOT NULL,
     CONSTRAINT fk_author
         FOREIGN KEY(author_id)
