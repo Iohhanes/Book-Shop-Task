@@ -9,4 +9,15 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     open-in-view: false
+  cloud:
+    gcp:
+      storage:
+        project-id: test-chat-324317
+        credentials:
+          location: classpath:google-cloud-credentials.json
+
+app:
+  storage:
+    bucket-name: book-shop
+    download-public-url: "https://storage-download.googleapis.com"
 
