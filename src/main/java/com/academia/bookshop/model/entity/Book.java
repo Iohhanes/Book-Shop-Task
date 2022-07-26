@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.Set;
 
@@ -23,14 +23,14 @@ public class Book {
     private Double price;
     @Column(name = "image_url")
     private String imageUrl;
-    @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", nullable = false)
-    private Date createdAt;
-    @Column(name = "updated_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", nullable = false)
-    private Date updatedAt;
-    @ManyToOne
+    @Column(name = "created_at", columnDefinition = "TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP", nullable = false)
+    private ZonedDateTime createdAt;
+    @Column(name = "updated_at", columnDefinition = "TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP", nullable = false)
+    private ZonedDateTime updatedAt;
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id", nullable = false)
     private Author author;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "bs_book_tag", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private Set<Tag> tags;
 

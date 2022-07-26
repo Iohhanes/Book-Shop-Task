@@ -17,12 +17,12 @@ CREATE TABLE IF NOT EXISTS bs_books
     title VARCHAR(255),
     price DECIMAL(15,2) NOT NULL DEFAULT 0.00,
     image_url TEXT,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
     author_id INTEGER NOT NULL,
     CONSTRAINT fk_author
         FOREIGN KEY(author_id)
-            REFERENCES bs_authors(id)
+            REFERENCES bs_authors(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 
@@ -32,10 +32,10 @@ CREATE TABLE IF NOT EXISTS bs_book_tag
     tag_id INTEGER NOT NULL,
     CONSTRAINT fk_book
         FOREIGN KEY(book_id)
-            REFERENCES bs_books(id),
+            REFERENCES bs_books(id) ON UPDATE CASCADE ON DELETE CASCADE,
     CONSTRAINT fk_tag
         FOREIGN KEY(tag_id)
-            REFERENCES bs_tags(id),
+            REFERENCES bs_tags(id) ON UPDATE CASCADE ON DELETE CASCADE,
     CONSTRAINT book_tag_key PRIMARY KEY(book_id, tag_id)
 );
 

@@ -1,20 +1,27 @@
 package com.academia.bookshop.mappers;
 
+import com.academia.bookshop.exception.ResourceNotFoundException;
 import com.academia.bookshop.model.dto.request.AddBookRequestDto;
 import com.academia.bookshop.model.dto.response.BookDto;
-import com.academia.bookshop.model.entity.Author;
 import com.academia.bookshop.model.entity.Book;
-import com.academia.bookshop.model.entity.Tag;
+import com.academia.bookshop.repository.AuthorRepository;
+import com.academia.bookshop.repository.TagRepository;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring", uses = {TagMapper.class, AuthorMapper.class})
 public abstract class BookMapper {
+    @Autowired
+    private TagRepository tagRepository;
+    @Autowired
+    private AuthorRepository authorRepository;
+
     public abstract BookDto fromEntity(Book source);
 
     public abstract List<BookDto> fromEntities(List<Book> sources);
@@ -23,8 +30,8 @@ public abstract class BookMapper {
     @Mapping(target = "author", ignore = true)
     @Mapping(target = "tags", ignore = true)
     @Mapping(target = "imageUrl", ignore = true)
-    @Mapping(target = "createdAt", expression = "java(new java.util.Date())")
-    @Mapping(target = "updatedAt", expression = "java(new java.util.Date())")
+    @Mapping(target = "createdAt", expression = "java(java.time.ZonedDateTime.now())")
+    @Mapping(target = "updatedAt", expression = "java(java.time.ZonedDateTime.now())")
     public abstract Book fromAddRequestDto(AddBookRequestDto source);
 
     @AfterMapping
@@ -34,9 +41,8 @@ public abstract class BookMapper {
         }
 
         target.setAuthor(
-                Author.builder()
-                        .id(source.getAuthorId())
-                        .build()
+                authorRepository.findById(source.getAuthorId())
+                        .orElseThrow(() -> new ResourceNotFoundException("Not found entity 'Author' with id = " + source.getAuthorId()))
         );
     }
 
@@ -46,13 +52,6 @@ public abstract class BookMapper {
             return;
         }
 
-        target.setTags(source.getTags().stream()
-                .map(tagId -> Tag.builder()
-                        .id(tagId)
-                        .build()
-                )
-                .collect(Collectors.toSet()
-                )
-        );
+        target.setTags(new HashSet<>(tagRepository.findAllById(source.getTags())));
     }
 }
