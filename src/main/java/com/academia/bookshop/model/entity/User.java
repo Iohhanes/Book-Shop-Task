@@ -1,39 +1,35 @@
 package com.academia.bookshop.model.entity;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
-@Table(name = "bs_authors")
+@Table(name = "bs_users")
 @Setter
 @Getter
 @RequiredArgsConstructor
 @AllArgsConstructor
-@Builder
-public class Author {
+@SuperBuilder
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "first_name")
-    private String firstName;
-    @Column(name = "last_name")
-    private String lastName;
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Book> books;
+    @Column(unique = true, nullable = false)
+    private String email;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Author author = (Author) o;
-        return id.equals(author.id);
+        User user = (User) o;
+        return id.equals(user.id) && email.equals(user.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, email);
     }
 }

@@ -1,8 +1,6 @@
 package com.academia.bookshop.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
@@ -11,8 +9,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "bs_books")
-@Data
-@NoArgsConstructor
+@Setter
+@Getter
+@RequiredArgsConstructor
 @AllArgsConstructor
 public class Book {
     @Id
@@ -23,15 +22,27 @@ public class Book {
     private Double price;
     @Column(name = "image_url")
     private String imageUrl;
-    @Column(name = "created_at", columnDefinition = "TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP", nullable = false)
+    @Column(
+            name = "created_at",
+            columnDefinition = "TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP",
+            nullable = false
+    )
     private ZonedDateTime createdAt;
-    @Column(name = "updated_at", columnDefinition = "TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP", nullable = false)
+    @Column(
+            name = "updated_at",
+            columnDefinition = "TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP",
+            nullable = false
+    )
     private ZonedDateTime updatedAt;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id", nullable = false)
     private Author author;
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "bs_book_tag", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    @JoinTable(
+            name = "bs_book_tag",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
     private Set<Tag> tags;
 
     @Override

@@ -3,3 +3,8 @@ spring:
     url: jdbc:postgresql://localhost:5432/db_book_shop
   jpa:
     show-sql: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8180/realms/book-shop/protocol/openid-connect/certs

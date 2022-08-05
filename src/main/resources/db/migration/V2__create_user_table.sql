@@ -1,0 +1,15 @@
+CREATE TABLE IF NOT EXISTS bs_users
+(
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE
+);
+
+
+
+
+
+
+
+
+
+
