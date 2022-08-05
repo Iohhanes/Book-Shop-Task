@@ -10,11 +10,14 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static com.academia.bookshop.constants.UrlConstants.API;
+import static com.academia.bookshop.security.AuthoritiesConstants.*;
 
 @RestController
 @RequestMapping(API + "/tags")
@@ -36,13 +39,14 @@ public class TagController {
     }
 
     @Operation(summary = "Add a tag", description = "Add a new tag")
+    @PreAuthorize("hasAuthority('" + AUTHORITY_ALL + "') or hasAuthority('" + AUTHORITY_CREATE + "')")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(
             value = "/add",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public TagDto add(@RequestBody @Parameter(description = "Necessary information to create a new tag") AddTagRequestDto addTagRequestDto)  {
+    public TagDto add(@RequestBody @Valid @Parameter(description = "Necessary information to create a new tag") AddTagRequestDto addTagRequestDto) {
         return tagService.add(addTagRequestDto);
     }
 
@@ -51,6 +55,7 @@ public class TagController {
             responseCode = "204",
             description = "No Content"
     )
+    @PreAuthorize("hasAuthority('" + AUTHORITY_ALL + "') or hasAuthority('" + AUTHORITY_DELETE + "')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PostMapping(value = "/remove", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void remove(@RequestBody @Parameter(description = "List of tag ids") List<Long> ids) {

@@ -1,9 +1,6 @@
 package com.academia.bookshop.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,14 +8,16 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "bs_tags")
-@Data
-@NoArgsConstructor
+@Setter
+@Getter
+@RequiredArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String title;
     @ManyToMany(mappedBy = "tags")
     private List<Book> books;

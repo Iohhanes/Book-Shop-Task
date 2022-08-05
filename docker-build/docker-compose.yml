@@ -16,6 +16,27 @@ services:
     networks:
       - web
 
+  keycloak:
+    image: quay.io/keycloak/keycloak:19.0.1
+    container_name: keycloak
+    restart: unless-stopped
+    command:
+      - start --import-realm
+    volumes:
+      - ./keycloak-config/book-shop-realm.json:/opt/keycloak/data/import/book-shop-realm.json
+    environment:
+      KC_HTTP_ENABLED: 1
+      KC_HOSTNAME_STRICT: 0
+      KC_PROXY: edge
+      KC_HTTP_PORT: 8180
+      KC_HOSTNAME_STRICT_HTTPS: 0
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      - '8180:8180'
+    networks:
+      - web
+
   book-shop-service:
     build:
       context: ..
@@ -26,6 +47,7 @@ services:
       - '8080:8080'
     depends_on:
       - db
+      - keycloak
     networks:
       - web
 

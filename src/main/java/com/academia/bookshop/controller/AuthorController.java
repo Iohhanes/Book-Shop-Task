@@ -10,11 +10,14 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static com.academia.bookshop.constants.UrlConstants.API;
+import static com.academia.bookshop.security.AuthoritiesConstants.*;
 
 @RestController
 @RequestMapping(API + "/authors")
@@ -36,13 +39,14 @@ public class AuthorController {
     }
 
     @Operation(summary = "Add a author", description = "Add a new author")
+    @PreAuthorize("hasAuthority('" + AUTHORITY_ALL + "') or hasAuthority('" + AUTHORITY_CREATE + "')")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(
             value = "/add",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public AuthorDto add(@RequestBody @Parameter(description = "Necessary information to create a new author") AddAuthorRequestDto addAuthorRequestDto)  {
+    public AuthorDto add(@RequestBody @Valid @Parameter(description = "Necessary information to create a new author") AddAuthorRequestDto addAuthorRequestDto) {
         return authorService.add(addAuthorRequestDto);
     }
 
@@ -51,6 +55,7 @@ public class AuthorController {
             responseCode = "204",
             description = "No Content"
     )
+    @PreAuthorize("hasAuthority('" + AUTHORITY_ALL + "') or hasAuthority('" + AUTHORITY_DELETE + "')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PostMapping(value = "/remove", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void remove(@RequestBody @Parameter(description = "List of author ids") List<Long> ids) {
