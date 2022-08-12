@@ -8,3 +8,5 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: http://localhost:8180/realms/book-shop/protocol/openid-connect/certs
+  kafka:
+    bootstrap-servers: http://localhost:9092

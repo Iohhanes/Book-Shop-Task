@@ -1,7 +1,7 @@
-package com.academia.bookshop.serive.impl;
+package com.academia.bookshop.service.impl;
 
 import com.academia.bookshop.properties.AppProperties;
-import com.academia.bookshop.serive.StorageService;
+import com.academia.bookshop.service.StorageService;
 import com.google.cloud.storage.Acl;
 import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;

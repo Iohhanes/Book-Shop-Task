@@ -1,11 +1,11 @@
-package com.academia.bookshop.serive.impl;
+package com.academia.bookshop.service.impl;
 
 import com.academia.bookshop.mappers.TagMapper;
 import com.academia.bookshop.model.dto.request.AddTagRequestDto;
 import com.academia.bookshop.model.dto.response.TagDto;
 import com.academia.bookshop.model.entity.Tag;
 import com.academia.bookshop.repository.TagRepository;
-import com.academia.bookshop.serive.TagService;
+import com.academia.bookshop.service.TagService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

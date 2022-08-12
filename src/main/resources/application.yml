@@ -21,6 +21,11 @@ spring:
         project-id: test-chat-324317
         credentials:
           location: classpath:google-cloud-credentials.json
+  kafka:
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    bootstrap-servers: http://kafka-broker:9092
 
 app:
   storage:

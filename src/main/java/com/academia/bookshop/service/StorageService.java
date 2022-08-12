@@ -1,4 +1,4 @@
-package com.academia.bookshop.serive;
+package com.academia.bookshop.service;
 
 import org.springframework.web.multipart.MultipartFile;
 

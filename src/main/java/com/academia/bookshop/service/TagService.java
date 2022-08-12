@@ -1,4 +1,4 @@
-package com.academia.bookshop.serive;
+package com.academia.bookshop.service;
 
 import com.academia.bookshop.model.dto.request.AddTagRequestDto;
 import com.academia.bookshop.model.dto.response.TagDto;

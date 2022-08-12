@@ -1,11 +1,11 @@
-package com.academia.bookshop.serive.impl;
+package com.academia.bookshop.service.impl;
 
 import com.academia.bookshop.mappers.AuthorMapper;
 import com.academia.bookshop.model.dto.request.AddAuthorRequestDto;
 import com.academia.bookshop.model.dto.response.AuthorDto;
 import com.academia.bookshop.model.entity.Author;
 import com.academia.bookshop.repository.AuthorRepository;
-import com.academia.bookshop.serive.AuthorService;
+import com.academia.bookshop.service.AuthorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
