@@ -2,7 +2,7 @@ package com.academia.bookshop.controller;
 
 import com.academia.bookshop.model.dto.request.AddTagRequestDto;
 import com.academia.bookshop.model.dto.response.TagDto;
-import com.academia.bookshop.serive.TagService;
+import com.academia.bookshop.service.TagService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

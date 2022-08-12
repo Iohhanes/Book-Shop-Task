@@ -2,7 +2,7 @@ package com.academia.bookshop.controller;
 
 import com.academia.bookshop.model.dto.request.AddAuthorRequestDto;
 import com.academia.bookshop.model.dto.response.AuthorDto;
-import com.academia.bookshop.serive.AuthorService;
+import com.academia.bookshop.service.AuthorService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

@@ -1,12 +1,13 @@
-package com.academia.bookshop.serive.impl;
+package com.academia.bookshop.service.impl;
 
 import com.academia.bookshop.mappers.BookMapper;
 import com.academia.bookshop.model.dto.request.AddBookRequestDto;
 import com.academia.bookshop.model.dto.response.BookDto;
 import com.academia.bookshop.model.entity.Book;
 import com.academia.bookshop.repository.BookRepository;
-import com.academia.bookshop.serive.BookService;
-import com.academia.bookshop.serive.StorageService;
+import com.academia.bookshop.service.BookService;
+import com.academia.bookshop.service.KafkaProducerService;
+import com.academia.bookshop.service.StorageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +24,7 @@ public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;
     private final StorageService storageService;
+    private final KafkaProducerService kafkaProducerService;
 
     @Transactional(readOnly = true)
     @Override
@@ -52,6 +54,7 @@ public class BookServiceImpl implements BookService {
         }
 
         book = bookRepository.save(book);
+        kafkaProducerService.sendNewBookCreationEvent(book);
         return bookMapper.fromEntity(book);
     }
 
