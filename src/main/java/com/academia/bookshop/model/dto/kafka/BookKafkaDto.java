@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class BookKafkaDto {
-    private Long id;
+    private Integer id;
     private String title;
     private Double price;
     private String imageUrl;

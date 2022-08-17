@@ -11,7 +11,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BookDto {
-    private Long id;
+    private Integer id;
     private String title;
     private Double price;
     private String imageUrl;

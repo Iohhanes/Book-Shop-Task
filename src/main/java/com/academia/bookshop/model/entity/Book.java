@@ -1,6 +1,10 @@
 package com.academia.bookshop.model.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
@@ -15,8 +19,9 @@ import java.util.Set;
 @AllArgsConstructor
 public class Book {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bookIdGenerator")
+    @SequenceGenerator(name = "bookIdGenerator", sequenceName = "bs_book_id_sequence", allocationSize = 1)
+    private Integer id;
     private String title;
     @Column(nullable = false)
     private Double price;
@@ -34,7 +39,7 @@ public class Book {
             nullable = false
     )
     private ZonedDateTime updatedAt;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "author_id", nullable = false)
     private Author author;
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -43,6 +48,7 @@ public class Book {
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
+    @BatchSize(size = 100)
     private Set<Tag> tags;
 
     @Override

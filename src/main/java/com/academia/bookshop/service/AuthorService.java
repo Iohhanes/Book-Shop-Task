@@ -12,5 +12,5 @@ public interface AuthorService {
 
     AuthorDto add(AddAuthorRequestDto addAuthorRequestDto);
 
-    void remove(List<Long> ids);
+    void remove(List<Integer> ids);
 }

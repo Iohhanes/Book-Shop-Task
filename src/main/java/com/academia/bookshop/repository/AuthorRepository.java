@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface AuthorRepository extends JpaRepository<Author, Long> {
+public interface AuthorRepository extends JpaRepository<Author, Integer> {
     @Query(value = "SELECT *\n" +
             "FROM bs_authors\n" +
             "WHERE bs_authors.first_name LIKE CONCAT('%', :search, '%')\n" +

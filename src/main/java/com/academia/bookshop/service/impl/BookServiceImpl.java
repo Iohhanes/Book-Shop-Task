@@ -60,7 +60,7 @@ public class BookServiceImpl implements BookService {
 
     @Transactional
     @Override
-    public void remove(List<Long> ids) {
+    public void remove(List<Integer> ids) {
         List<Book> books = bookRepository.findAllById(ids);
         String[] fileUrls = books.stream().map(Book::getImageUrl).toArray(String[]::new);
 

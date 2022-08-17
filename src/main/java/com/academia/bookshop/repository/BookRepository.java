@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface BookRepository extends JpaRepository<Book, Long> {
+public interface BookRepository extends JpaRepository<Book, Integer> {
     @Query(value = "SELECT DISTINCT bs_books.* FROM bs_books\n" +
             "    JOIN bs_book_tag bbt ON bs_books.id = bbt.book_id\n" +
             "    JOIN bs_tags bt ON bt.id = bbt.tag_id\n" +

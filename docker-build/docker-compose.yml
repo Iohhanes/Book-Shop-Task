@@ -11,6 +11,8 @@ services:
       POSTGRES_DB: db_book_shop
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: secret
+    volumes:
+      - dbdata:/var/lib/postgresql/data
     ports:
       - '5432:5432'
     networks:
@@ -83,3 +85,6 @@ services:
 networks:
   web:
     driver: "bridge"
+
+volumes:
+  dbdata: { }

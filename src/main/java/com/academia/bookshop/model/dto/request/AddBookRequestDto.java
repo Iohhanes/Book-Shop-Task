@@ -14,6 +14,6 @@ public class AddBookRequestDto {
     @Size(min = 1, max = 255)
     private String title;
     private Double price;
-    private Long authorId;
-    private Set<Long> tags;
+    private Integer authorId;
+    private Set<Short> tags;
 }

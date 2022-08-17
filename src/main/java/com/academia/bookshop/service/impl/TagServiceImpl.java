@@ -49,7 +49,7 @@ public class TagServiceImpl implements TagService {
 
     @Transactional
     @Override
-    public void remove(List<Long> ids) {
+    public void remove(List<Short> ids) {
         tagRepository.deleteAllByIdInBatch(ids);
     }
 }
