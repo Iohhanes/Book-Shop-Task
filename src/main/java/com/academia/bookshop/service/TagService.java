@@ -12,5 +12,5 @@ public interface TagService {
 
     TagDto add(AddTagRequestDto addTagRequestDto);
 
-    void remove(List<Long> ids);
+    void remove(List<Short> ids);
 }

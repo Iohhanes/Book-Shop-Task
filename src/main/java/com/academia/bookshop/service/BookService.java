@@ -14,5 +14,5 @@ public interface BookService {
 
     BookDto add(AddBookRequestDto addBookRequestDto, MultipartFile image) throws IOException;
 
-    void remove(List<Long> ids);
+    void remove(List<Integer> ids);
 }

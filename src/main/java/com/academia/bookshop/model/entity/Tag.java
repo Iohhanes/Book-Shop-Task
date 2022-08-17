@@ -15,8 +15,9 @@ import java.util.Objects;
 @Builder
 public class Tag {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tagIdGenerator")
+    @SequenceGenerator(name = "tagIdGenerator", sequenceName = "bs_tag_id_sequence", allocationSize = 1)
+    private Short id;
     @Column(nullable = false)
     private String title;
     @ManyToMany(mappedBy = "tags")

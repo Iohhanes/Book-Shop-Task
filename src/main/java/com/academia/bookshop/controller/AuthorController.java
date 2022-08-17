@@ -58,7 +58,7 @@ public class AuthorController {
     @PreAuthorize("hasAuthority('" + AUTHORITY_ALL + "') or hasAuthority('" + AUTHORITY_DELETE + "')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PostMapping(value = "/remove", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void remove(@RequestBody @Parameter(description = "List of author ids") List<Long> ids) {
+    public void remove(@RequestBody @Parameter(description = "List of author ids") List<Integer> ids) {
         authorService.remove(ids);
     }
 }

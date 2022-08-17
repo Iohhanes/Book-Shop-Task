@@ -48,7 +48,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Transactional
     @Override
-    public void remove(List<Long> ids) {
+    public void remove(List<Integer> ids) {
         authorRepository.deleteAllByIdInBatch(ids);
     }
 }

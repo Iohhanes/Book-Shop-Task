@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TagRepository extends JpaRepository<Tag, Long> {
+public interface TagRepository extends JpaRepository<Tag, Short> {
     @Query(value = "SELECT *\n" +
             "FROM bs_tags\n" +
             "WHERE bs_tags.title LIKE CONCAT('%', :search, '%')",
